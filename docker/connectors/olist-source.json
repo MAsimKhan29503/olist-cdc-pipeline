@@ -1,0 +1,25 @@
+{
+  "name": "olist-source-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "source-db",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "olist_source",
+    "topic.prefix": "olist",
+    "plugin.name": "pgoutput",
+    "slot.name": "olist_slot",
+    "publication.name": "olist_publication",
+    "publication.autocreate.mode": "filtered",
+    "table.include.list": "public.customers,public.orders,public.order_items",
+    "snapshot.mode": "initial",
+    "decimal.handling.mode": "string",
+    "time.precision.mode": "adaptive",
+    "tombstones.on.delete": "true",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false"
+  }
+}
