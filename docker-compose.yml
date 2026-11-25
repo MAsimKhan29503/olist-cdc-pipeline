@@ -1,0 +1,23 @@
+services:
+  source-db:
+    image: postgres:16
+    container_name: cdc-source-db
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+      - -c
+      - max_wal_senders=10
+      - -c
+      - max_replication_slots=10
+    environment:
+      POSTGRES_USER: ${SOURCE_DB_USER}
+      POSTGRES_PASSWORD: ${SOURCE_DB_PASSWORD}
+      POSTGRES_DB: ${SOURCE_DB_NAME}
+    ports:
+      - "5435:5432"
+    volumes:
+      - source-db-data:/var/lib/postgresql/data
+
+volumes:
+  source-db-data:
